@@ -45,6 +45,10 @@ namespace JeuxDuPendu
 			
 			// et de la même taille que panel1
             _HangmanViewer.Size = panel1.Size;
+            panel1.BackColor = Color.Transparent;
+
+            // Assign it's 'background'
+            panel1.Parent = pictureBox1;
         }
 
         /// <summary>
