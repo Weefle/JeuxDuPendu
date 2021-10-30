@@ -57,6 +57,8 @@ namespace JeuxDuPendu
             Joueur j2 = new Joueur("Roger");
 
             j.wins = 10;
+
+            Console.WriteLine(j.wins);
             users.Add(j);
             users.Add(j1);
             users.Add(j2);

@@ -1,4 +1,4 @@
-nom
-John
-Lucy
-Roger
+nom;wins;fails
+John;10;0
+Lucy;0;0
+Roger;0;0

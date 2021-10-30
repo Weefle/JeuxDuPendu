@@ -9,7 +9,8 @@ namespace JeuxDuPendu
     internal class Joueur
     {
         public string nom { get; set; }
-        public int wins, fails;
+        public int wins { get; set; }
+        public int fails { get; set; }
 
 
         public Joueur(string nom)
