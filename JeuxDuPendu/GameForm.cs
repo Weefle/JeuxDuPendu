@@ -45,10 +45,27 @@ namespace JeuxDuPendu
 			
 			// et de la même taille que panel1
             _HangmanViewer.Size = panel1.Size;
-            panel1.BackColor = Color.Transparent;
 
-            // Assign it's 'background'
+            panel1.BackColor = Color.Transparent;
             panel1.Parent = pictureBox1;
+
+            lCrypedWord.BackColor = Color.Transparent;
+            lCrypedWord.Parent = pictureBox1;
+
+            bReset.BackColor = Color.Transparent;
+            bReset.Parent = pictureBox1;
+
+            button1.BackColor = Color.Transparent;
+            button1.Parent = pictureBox1;
+
+            label2.BackColor = Color.Transparent;
+            label2.Parent = pictureBox1;
+
+            label3.BackColor = Color.Transparent;
+            label3.Parent = pictureBox1;
+
+            /*richTextBox1.BackColor = Color.Transparent;
+            richTextBox1.Parent = pictureBox1;*/
         }
 
         /// <summary>

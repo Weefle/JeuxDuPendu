@@ -14,6 +14,11 @@ namespace JeuxDuPendu
         public Options()
         {
             InitializeComponent();
+            button1.BackColor = Color.Transparent;
+            button1.Parent = pictureBox1;
+
+            button2.BackColor = Color.Transparent;
+            button2.Parent = pictureBox1;
         }
 
     

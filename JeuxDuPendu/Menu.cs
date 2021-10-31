@@ -18,6 +18,18 @@ namespace JeuxDuPendu
         public Menu()
         {
             InitializeComponent();
+
+            label1.BackColor = Color.Transparent;
+            label1.Parent = pictureBox1;
+
+            button1.BackColor = Color.Transparent;
+            button1.Parent = pictureBox1;
+
+            button2.BackColor = Color.Transparent;
+            button2.Parent = pictureBox1;
+
+            button3.BackColor = Color.Transparent;
+            button3.Parent = pictureBox1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -83,6 +95,11 @@ namespace JeuxDuPendu
             {
                 Console.WriteLine(user.nom);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

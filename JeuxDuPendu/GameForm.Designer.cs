@@ -63,6 +63,7 @@
             // lCrypedWord
             // 
             this.lCrypedWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lCrypedWord.ForeColor = System.Drawing.Color.Blue;
             this.lCrypedWord.Location = new System.Drawing.Point(340, 390);
             this.lCrypedWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lCrypedWord.Name = "lCrypedWord";
@@ -74,6 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Red;
             this.label2.Location = new System.Drawing.Point(844, 82);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
@@ -84,6 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Red;
             this.label3.Location = new System.Drawing.Point(844, 128);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
@@ -104,6 +107,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.ForeColor = System.Drawing.Color.Lime;
             this.richTextBox1.Location = new System.Drawing.Point(844, 156);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
