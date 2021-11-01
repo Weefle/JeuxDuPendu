@@ -17,9 +17,12 @@ namespace JeuxDuPendu
 
         // Initialisation de l'instance de la classe d'affichage du pendu.
         HangmanViewer _HangmanViewer = new HangmanViewer();
+        List<char> _wrongLetters = new List<char>();
+        List<PictureBox> _wrongPictures = new List<PictureBox>();
         string line;
         int letterNumber;
         int essaisRestants;
+        int pos = 0;
         System.Media.SoundPlayer sp;
 
         /// <summary>
@@ -94,7 +97,7 @@ namespace JeuxDuPendu
             label2.Text = "Il vous reste " + letterNumber.ToString() + " lettre(s) !";
             label3.Text = "Il vous reste " + essaisRestants.ToString() + " essai(s) !";
             //listView1.Items.Clear();
-            richTextBox1.Text = "";
+            //richTextBox1.Text = "";
             //Affichage du mot à trouver dans le label.
 
 
@@ -153,6 +156,16 @@ namespace JeuxDuPendu
                     if (!lCrypedWord.Text.Contains("_"))
                     {
                         MessageBox.Show("Vous avez gagné !");
+                        _wrongLetters.Clear();
+                        pos = 0;
+                        foreach (PictureBox item in _wrongPictures)
+                        {
+
+                            this.Controls.Remove(item);
+
+
+                        }
+                        _wrongPictures.Clear();
                         StartNewGame();
                     }
                     //TODO corriger decrementation nombre de lettres
@@ -166,11 +179,22 @@ namespace JeuxDuPendu
                 }
                 else
                 {
-                    if (!richTextBox1.Text.Contains(letter))
+                    //if (!richTextBox1.Text.Contains(letter))
+                    if (!_wrongLetters.Contains(letter))
                     {
+                        _wrongLetters.Add(letter);
                         essaisRestants--;
                         _HangmanViewer.MoveNextStep();
-                        richTextBox1.Text += letter + "\n";
+                        PictureBox pb = new PictureBox();
+                        pb.Image = Image.FromFile("../../../Resources/letters/letter_" + char.ToUpper(letter) + ".png");
+                        pb.Location = new Point(100, pos);
+                        pos+= 50;
+                        pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pb.Size = new Size(50, 50);
+                        _wrongPictures.Add(pb);
+                        this.Controls.Add(pb);
+                        pb.BringToFront();
+                        //richTextBox1.Text += letter + "\n";
                         label3.Text = "Il vous reste " + essaisRestants.ToString() + " essai(s) !";
                     }
 
@@ -200,6 +224,16 @@ namespace JeuxDuPendu
                             form.ShowDialog();
                         }
                         sp = null;
+                        _wrongLetters.Clear();
+                        pos = 0;
+                        foreach (PictureBox item in _wrongPictures)
+                        {
+                           
+                                this.Controls.Remove(item);
+                            
+                         
+                        }
+                        _wrongPictures.Clear();
                         //MessageBox.Show("Vous avez perdu !");
                         StartNewGame();
                     }
