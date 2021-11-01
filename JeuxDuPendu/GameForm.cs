@@ -186,7 +186,8 @@ namespace JeuxDuPendu
                         essaisRestants--;
                         _HangmanViewer.MoveNextStep();
                         PictureBox pb = new PictureBox();
-                        pb.Image = Image.FromFile("../../../Resources/letters/letter_" + char.ToUpper(letter) + ".png");
+                        //TODO corriger problème avec les accents !
+                        pb.Image = Image.FromFile("../../../Resources/letters/letter_" + System.Text.RegularExpressions.Regex.Replace(letter.ToString(), @"[^a-zA-Z0-9_\\]", "").ToUpperInvariant() + ".png");
                         pb.Location = new Point(100, pos);
                         pos+= 50;
                         pb.SizeMode = PictureBoxSizeMode.StretchImage;
