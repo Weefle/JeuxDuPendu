@@ -8,6 +8,8 @@ namespace JeuxDuPendu
 {
     static class Program
     {
+
+        public static List<Joueur> joueurs = new List<Joueur>();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

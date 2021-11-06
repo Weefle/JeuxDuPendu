@@ -34,15 +34,17 @@ namespace JeuxDuPendu
             this.button2 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(580, 360);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(663, 480);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 32);
+            this.button1.Size = new System.Drawing.Size(96, 43);
             this.button1.TabIndex = 8;
             this.button1.Text = "Quitter";
             this.button1.UseVisualStyleBackColor = true;
@@ -50,12 +52,12 @@ namespace JeuxDuPendu
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(255, 103);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Location = new System.Drawing.Point(291, 137);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(163, 37);
+            this.button2.Size = new System.Drawing.Size(186, 49);
             this.button2.TabIndex = 9;
-            this.button2.Text = "Choisir le fichier source";
+            this.button2.Text = "Choisir le fichier source de mots";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -63,30 +65,45 @@ namespace JeuxDuPendu
             // 
             this.openFileDialog1.DefaultExt = "txt";
             this.openFileDialog1.FileName = "mots.txt";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk_1);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-4, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Location = new System.Drawing.Point(-5, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(706, 426);
+            this.pictureBox1.Size = new System.Drawing.Size(807, 568);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(291, 242);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(186, 49);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "Choisir le fichier source de joueurs";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            // 
             // Options
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 422);
+            this.ClientSize = new System.Drawing.Size(800, 563);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Options";
@@ -102,5 +119,7 @@ namespace JeuxDuPendu
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }

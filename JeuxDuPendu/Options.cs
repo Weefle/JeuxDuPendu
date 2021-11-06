@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -33,17 +34,22 @@ namespace JeuxDuPendu
 
         private void button2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
+            openFileDialog1.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + @"\..\..\..\Resources\");
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Stream stream = openFileDialog1.OpenFile();
+                //TODO lire le fichier
+;            }
         }
 
         private void Options_Load(object sender, EventArgs e)
         {
-
+            
         }
 
-        private void openFileDialog1_FileOk_1(object sender, CancelEventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            openFileDialog1.OpenFile();
+            openFileDialog2.ShowDialog();
         }
     }
 }
