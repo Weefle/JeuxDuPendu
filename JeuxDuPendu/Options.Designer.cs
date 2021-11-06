@@ -90,7 +90,7 @@ namespace JeuxDuPendu
             // 
             // openFileDialog2
             // 
-            this.openFileDialog2.FileName = "openFileDialog2";
+            this.openFileDialog2.FileName = "users.csv";
             // 
             // Options
             // 

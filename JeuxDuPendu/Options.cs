@@ -49,7 +49,13 @@ namespace JeuxDuPendu
 
         private void button3_Click(object sender, EventArgs e)
         {
-            openFileDialog2.ShowDialog();
+            openFileDialog2.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + @"\..\..\..\Resources\");
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
+            {
+                Stream stream = openFileDialog2.OpenFile();
+                //TODO lire le fichier
+                ;
+            }
         }
     }
 }
