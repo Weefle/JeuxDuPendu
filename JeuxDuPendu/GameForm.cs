@@ -250,19 +250,19 @@ namespace JeuxDuPendu
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var form2 = new Menu();
 
-            if (Application.OpenForms.Count > 2)
+            if (Application.OpenForms.Count > 1)
             {
                 for (int i = 0; i < Application.OpenForms.Count; i++)
                 {
                     Application.OpenForms[i].Close();
                 }
+                var form2 = new Menu();
                 form2.Show();
             }
             else
             {
-                this.Hide();
+          
                 var form3 = new Menu();
                 form3.Closed += (s, args) => this.Close();
                 form3.Show();
