@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -76,7 +77,16 @@ namespace JeuxDuPendu
         /// </summary>
         public void StartNewGame()
         {
-            
+            foreach (PictureBox item in _wrongPictures)
+            {
+
+                this.Controls.Remove(item);
+
+
+            }
+            _wrongPictures.Clear();
+            _wrongLetters.Clear();
+            pos = 0;
             if (sp == null)
             {
                 sp = new System.Media.SoundPlayer("../../../Resources/halloween-theme-song.wav");
@@ -135,6 +145,23 @@ namespace JeuxDuPendu
                 
         }
 
+        static string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+
         private void KeyPressed(char letter)
         {
             //if (line.Contains(letter))
@@ -156,16 +183,9 @@ namespace JeuxDuPendu
                     if (!lCrypedWord.Text.Contains("_"))
                     {
                         MessageBox.Show("Vous avez gagné !");
-                        _wrongLetters.Clear();
-                        pos = 0;
-                        foreach (PictureBox item in _wrongPictures)
-                        {
-
-                            this.Controls.Remove(item);
-
-
-                        }
-                        _wrongPictures.Clear();
+                      
+                       
+                        
                         StartNewGame();
                     }
                     //TODO corriger decrementation nombre de lettres
@@ -187,7 +207,7 @@ namespace JeuxDuPendu
                         _HangmanViewer.MoveNextStep();
                         PictureBox pb = new PictureBox();
                         //TODO corriger problème avec les accents !
-                        pb.Image = Image.FromFile("../../../Resources/letters/letter_" + System.Text.RegularExpressions.Regex.Replace(letter.ToString(), @"[^a-zA-Z0-9_\\]", "").ToUpperInvariant() + ".png");
+                        pb.Image = Image.FromFile("../../../Resources/letters/letter_" + RemoveDiacritics(letter.ToString()).ToUpperInvariant() + ".png");
                         pb.Location = new Point(100, pos);
                         pos+= 50;
                         pb.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -225,16 +245,9 @@ namespace JeuxDuPendu
                             form.ShowDialog();
                         }
                         sp = null;
-                        _wrongLetters.Clear();
-                        pos = 0;
-                        foreach (PictureBox item in _wrongPictures)
-                        {
-                           
-                                this.Controls.Remove(item);
-                            
-                         
-                        }
-                        _wrongPictures.Clear();
+                       
+                        
+                        
                         //MessageBox.Show("Vous avez perdu !");
                         StartNewGame();
                     }
