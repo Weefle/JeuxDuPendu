@@ -30,6 +30,9 @@ namespace JeuxDuPendu
 
             button3.BackColor = Color.Transparent;
             button3.Parent = pictureBox1;
+
+            button4.BackColor = Color.Transparent;
+            button4.Parent = pictureBox1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -62,44 +65,20 @@ namespace JeuxDuPendu
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            var users = new List<Joueur>();
-
-            Joueur j = new Joueur("John");
-            Joueur j1 = new Joueur("Lucy");
-            Joueur j2 = new Joueur("Roger");
-
-            j.wins = 10;
-
-            Console.WriteLine(j.wins);
-            users.Add(j);
-            users.Add(j1);
-            users.Add(j2);
-
-
-
-            var writer = new StreamWriter("../../../Resources/users.csv");
-            var csvWriter = new CsvWriter(writer, CultureInfo.CurrentCulture);
-
-            csvWriter.WriteHeader<Joueur>();
-            csvWriter.NextRecord();
-            csvWriter.WriteRecords(users);
-            writer.Dispose();
-
-            StreamReader streamReader = File.OpenText("../../../Resources/users.csv");
-            CsvReader csvReader = new CsvReader(streamReader, CultureInfo.CurrentCulture);
-
-            users = csvReader.GetRecords<Joueur>().ToList();
-
-            streamReader.Dispose();
-            foreach (Joueur user in users)
-            {
-                Console.WriteLine(user.nom);
-            }
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form2 = new Scores();
+            form2.Closed += (s, args) => this.Close();
+            form2.Show();
         }
     }
 }

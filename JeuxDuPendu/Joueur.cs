@@ -16,8 +16,8 @@ namespace JeuxDuPendu
         public Joueur(string nom)
         {
             this.nom = nom;
-            this.wins = 0;
-            this.fails = 0;
+            this.wins = wins;
+            this.fails = fails;
         }
 
     }

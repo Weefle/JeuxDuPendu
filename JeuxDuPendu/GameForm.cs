@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using CsvHelper;
 using JeuxDuPendu.MyControls;
 
 namespace JeuxDuPendu
@@ -87,6 +88,7 @@ namespace JeuxDuPendu
             _wrongPictures.Clear();
             _wrongLetters.Clear();
             pos = 0;
+            
             if (sp == null)
             {
                 sp = new System.Media.SoundPlayer("../../../Resources/halloween-theme-song.wav");
@@ -95,7 +97,7 @@ namespace JeuxDuPendu
             }
            
 
-            var lines = File.ReadAllLines("../../../Resources/mots.txt");
+            var lines = File.ReadAllLines(Program.fichierMots);
             var r = new Random();
             var randomLineNumber = r.Next(0, lines.Length - 1);
             line = lines[randomLineNumber];
@@ -182,10 +184,25 @@ namespace JeuxDuPendu
                     lCrypedWord.Text = sb.ToString();
                     if (!lCrypedWord.Text.Contains("_"))
                     {
-                        MessageBox.Show("Vous avez gagné !");
-                      
-                       
-                        
+                        using (Form form = new Form())
+                        {
+                            Image img = Image.FromFile("../../../Resources/mario_stage_end.gif");
+
+                            form.StartPosition = FormStartPosition.CenterScreen;
+                            form.Size = img.Size;
+
+                            PictureBox pb = new PictureBox();
+                            pb.Dock = DockStyle.Fill;
+                            pb.Image = img;
+
+                            form.Controls.Add(pb);
+                            sp = new System.Media.SoundPlayer("../../../Resources/smb_stage_clear.wav");
+                            sp.Play();
+                            form.ShowDialog();
+                        }
+                        sp = null;
+
+
                         StartNewGame();
                     }
                     //TODO corriger decrementation nombre de lettres
