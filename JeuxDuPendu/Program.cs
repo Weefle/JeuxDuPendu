@@ -2,6 +2,7 @@ using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,13 +22,18 @@ namespace JeuxDuPendu
         [STAThread]
         static void Main()
         {
-            Joueur j = new Joueur("John");
-            Joueur j1 = new Joueur("Lucy");
-            Joueur j2 = new Joueur("Roger");
+            Joueur j = new Joueur();
+            Joueur j1 = new Joueur();
+            Joueur j2 = new Joueur();
 
-            j.wins = 10;
+            j.Name = "John";
+            j1.Name = "Lucy";
+            j2.Name = "Bob";
+            j.Wins = 10;
+            j1.Wins = 15;
+            j2.Wins = 20;
 
-           
+
             joueurs.Add(j);
             joueurs.Add(j1);
             joueurs.Add(j2);

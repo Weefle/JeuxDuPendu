@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper.Configuration;
 
 namespace JeuxDuPendu
 {
-    internal class Joueur
+    public class Joueur
     {
-        public string nom { get; set; }
-        public int wins { get; set; }
-        public int fails { get; set; }
+        public string Name { get; set; }
+        public int Wins { get; set; }
+        public int Fails { get; set; }
 
 
-        public Joueur(string nom)
+        public class BalgenModelClassMap : ClassMap<Joueur>
         {
-            this.nom = nom;
-            this.wins = wins;
-            this.fails = fails;
+            /// <summary>
+            ///     Constructeur permettant de mapper les champs d'un fichier CSV avec le mod�le BalgenModel
+            /// </summary>
+            public BalgenModelClassMap()
+            {
+                Map(m => m.Name).Name("Nom");
+                Map(m => m.Wins).Name("Wins");
+                Map(m => m.Fails).Name("Fails");
+          
+            }
         }
 
     }

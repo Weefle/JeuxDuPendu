@@ -37,9 +37,10 @@ namespace JeuxDuPendu
             openFileDialog1.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + @"\..\..\..\Resources\");
             if(openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Stream stream = openFileDialog1.OpenFile();
+               // Stream stream = openFileDialog1.OpenFile();
                 //TODO lire le fichier
-;            }
+                Program.fichierMots = openFileDialog1.FileName;
+                            }
         }
 
         private void Options_Load(object sender, EventArgs e)
@@ -52,9 +53,9 @@ namespace JeuxDuPendu
             openFileDialog2.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + @"\..\..\..\Resources\");
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
-                Stream stream = openFileDialog2.OpenFile();
+               // Stream stream = openFileDialog2.OpenFile();
                 //TODO lire le fichier
-                ;
+                Program.fichierSauvegarde = openFileDialog2.FileName;
             }
         }
     }
