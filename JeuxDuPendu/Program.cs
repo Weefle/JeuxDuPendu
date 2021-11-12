@@ -26,16 +26,9 @@ namespace JeuxDuPendu
         [STAThread]
         static void Main()
         {
-            Joueur j = new Joueur();
-            Joueur j1 = new Joueur();
-            Joueur j2 = new Joueur();
-
-            j.Name = "John";
-            j1.Name = "Lucy";
-            j2.Name = "Bob";
-            j.Wins = 10;
-            j1.Wins = 15;
-            j2.Wins = 20;
+            Joueur j = new Joueur("John", 10, 5);
+            Joueur j1 = new Joueur("Lucy", 6, 2);
+            Joueur j2 = new Joueur("Bob", 4, 10);
 
 
             joueurs.Add(j);
@@ -58,9 +51,7 @@ namespace JeuxDuPendu
                 
             }
 
-            var server = new AsyncServer();
-            server.StartServer();
-            servers.Add(server);
+            
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

@@ -26,12 +26,14 @@ namespace JeuxDuPendu
         int essaisRestants;
         int pos = 0;
         System.Media.SoundPlayer sp;
+        Joueur joueur;
 
         /// <summary>
         /// Constructeur du formulaire de jeux
         /// </summary>
-        public GameForm()
+        public GameForm(Joueur joueur)
         {
+            this.joueur = joueur;
             InitializeComponent();
             InitializeMyComponent();
             StartNewGame();
@@ -274,7 +276,7 @@ namespace JeuxDuPendu
 
         private void GameForm_Load(object sender, EventArgs e)
         {
-
+            label1.Text = joueur.Name;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -311,6 +313,11 @@ namespace JeuxDuPendu
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

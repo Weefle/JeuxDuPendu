@@ -36,5 +36,17 @@ namespace JeuxDuPendu
 
             dataGridView.DataSource = Program.servers;
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedServer = Program.servers[e.RowIndex];
+            AsyncClient client;
+           /* do
+            {
+                client = new AsyncClient(e.RowIndex);
+            } while (Program.clients);
+            
+            client.StartClient();*/
+        }
     }
 }

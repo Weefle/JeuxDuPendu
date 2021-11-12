@@ -34,6 +34,9 @@ namespace JeuxDuPendu
 
             button4.BackColor = Color.Transparent;
             button4.Parent = pictureBox1;
+
+            button5.BackColor = Color.Transparent;
+            button5.Parent = pictureBox1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,20 +46,33 @@ namespace JeuxDuPendu
             var form2 = new GameForm();
             form2.Closed += (s, args) => this.Close();
             form2.Show();*/
-            const string message =
-       "Donnez un nom à votre serveur";
-            var result = Interaction.InputBox(message, "Création du serveur");
+            Joueur joueur;
+
+            const string mess =
+ "Quel est votre nom ?";
+            var reslt = Interaction.InputBox(mess, "Nom du joueur");
 
             // If the no button was pressed ...
-            if (!string.IsNullOrEmpty(result))
+            if (!string.IsNullOrEmpty(reslt))
             {
+
+                if (!Program.joueurs.Any(x => x.Name == reslt))
+                {
+                    joueur = new Joueur(reslt, 0, 0);
+                }
+
+                else
+                {
+                    joueur = Program.joueurs.Where(x => x.Name == reslt).First();
+                }
+
                 this.Hide();
-                var form2 = new GameForm();
+                var form2 = new GameForm(joueur);
                 //form2.Closed += (s, args) => this.Close();
                 form2.ShowDialog();
                 this.Close();
-            }
 
+            }
             
         }
 
@@ -71,20 +87,80 @@ namespace JeuxDuPendu
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            var form2 = new ServerListForm();
-            /*var form3 = new GameForm();
-            form2.Closed += (s, args) => this.Close();
-            form3.Closed += (s, args) => this.Close();
-            form2.Show();*/
-            form2.ShowDialog();
-            this.Close();
-        }
+
+            Joueur joueur;
+
+            const string mess =
+ "Quel est votre nom ?";
+            var reslt = Interaction.InputBox(mess, "Nom du joueur");
+
+            // If the no button was pressed ...
+            if (!string.IsNullOrEmpty(reslt))
+            {
+               
+                if (!Program.joueurs.Any(x => x.Name == reslt))
+                {
+                    joueur = new Joueur(reslt, 0, 0);
+                }
+
+                else
+                {
+                    joueur = Program.joueurs.Where(x => x.Name == reslt).First();
+                }
+
+
+
+                const string msg =
+                "Voulez vous créer un serveur ?";
+                    const string caption = "Multijoueur";
+                    var result = MessageBox.Show(msg, caption,
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
+
+
+                    if (result == DialogResult.Yes)
+                    {
+                        const string message =
+         "Donnez un nom à votre serveur";
+                        var res = Interaction.InputBox(message, "Création du serveur");
+
+                        // If the no button was pressed ...
+                        if (!string.IsNullOrEmpty(res))
+                        {
+
+                            var server = new AsyncServer();
+                            server.StartServer();
+                            Program.servers.Add(server);
+                            this.Hide();
+                            var form2 = new GameForm(joueur);
+                            /*var form3 = new GameForm();
+                            form2.Closed += (s, args) => this.Close();
+                            form3.Closed += (s, args) => this.Close();
+                            form2.Show();*/
+                            form2.ShowDialog();
+                            this.Close();
+                        }
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        this.Hide();
+                        var form2 = new ServerListForm();
+                        /*var form3 = new GameForm();
+                        form2.Closed += (s, args) => this.Close();
+                        form3.Closed += (s, args) => this.Close();
+                        form2.Show();*/
+                        form2.ShowDialog();
+                        this.Close();
+                    }
+
+
+            }
+           
+    }
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            var client = new AsyncClient(0);
-            client.StartClient();
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -98,6 +174,11 @@ namespace JeuxDuPendu
             var form2 = new Scores();
             //form2.Closed += (s, args) => this.Close();
             form2.ShowDialog();
+            this.Close();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }
