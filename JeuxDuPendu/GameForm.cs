@@ -279,9 +279,13 @@ namespace JeuxDuPendu
 
         private void button1_Click(object sender, EventArgs e)
         {
+            sp.Stop();
             this.Hide();
+            var form = new Menu();
+            form.ShowDialog();
+            this.Close();
 
-            if (Application.OpenForms.Count > 1)
+            /*if (Application.OpenForms.Count > 1)
             {
                 for (int i = 0; i < Application.OpenForms.Count; i++)
                 {
@@ -296,8 +300,8 @@ namespace JeuxDuPendu
                 var form3 = new Menu();
                 form3.Closed += (s, args) => this.Close();
                 form3.Show();
-            }
-            sp.Stop();
+            }*/
+           
 
             /* this.Hide();
              var form2 = new Menu();

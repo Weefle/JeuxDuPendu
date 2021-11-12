@@ -10,27 +10,11 @@ using System.Windows.Forms;
 
 namespace JeuxDuPendu
 {
-    public partial class Scores : Form
+    public partial class ServerListForm : Form
     {
-        public Scores()
+        public ServerListForm()
         {
             InitializeComponent();
-        }
-
-        private void Scores_Load(object sender, EventArgs e)
-        {
-           
-                CreateListViewItem(dataGridView1);
-            
-        }
-
-        public static void CreateListViewItem(DataGridView dataGridView)
-        {
- 
-
-            // Other requirements as needed
-
-            dataGridView.DataSource = Program.joueurs;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,11 +24,6 @@ namespace JeuxDuPendu
             //form2.Closed += (s, args) => this.Close();
             form2.ShowDialog();
             this.Close();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

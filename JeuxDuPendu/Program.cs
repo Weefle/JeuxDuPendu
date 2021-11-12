@@ -53,8 +53,10 @@ namespace JeuxDuPendu
                 joueurs = csv.GetRecords<Joueur>().ToList();
                 
             }
-            
-            
+
+            var server = new AsyncServer();
+            server.StartServer();
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
