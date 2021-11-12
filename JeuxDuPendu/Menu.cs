@@ -59,6 +59,7 @@ namespace JeuxDuPendu
                 if (!Program.joueurs.Any(x => x.Name == reslt))
                 {
                     joueur = new Joueur(reslt, 0, 0);
+                    Program.joueurs.Add(joueur);
                 }
 
                 else
@@ -101,6 +102,7 @@ namespace JeuxDuPendu
                 if (!Program.joueurs.Any(x => x.Name == reslt))
                 {
                     joueur = new Joueur(reslt, 0, 0);
+                    Program.joueurs.Add(joueur);
                 }
 
                 else
