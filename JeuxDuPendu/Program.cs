@@ -26,7 +26,7 @@ namespace JeuxDuPendu
         [STAThread]
         static void Main()
         {
-            Joueur j = new Joueur("John", 10, 5);
+           /* Joueur j = new Joueur("John", 10, 5);
             Joueur j1 = new Joueur("Lucy", 6, 2);
             Joueur j2 = new Joueur("Bob", 4, 10);
 
@@ -43,7 +43,7 @@ namespace JeuxDuPendu
                 csv.WriteRecords(joueurs);
                
             }
-
+           */
             using (var reader = new StreamReader(fichierSauvegarde))
             using (var csv = new CsvReader(reader, CultureInfo.CurrentCulture))
             {

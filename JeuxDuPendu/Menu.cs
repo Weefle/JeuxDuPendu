@@ -179,6 +179,12 @@ namespace JeuxDuPendu
 
         private void button5_Click(object sender, EventArgs e)
         {
+            using (var writer = new StreamWriter(Program.fichierSauvegarde))
+            using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
+            {
+                csv.WriteRecords(Program.joueurs);
+
+            }
             this.Close();
         }
     }

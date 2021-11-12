@@ -202,6 +202,7 @@ namespace JeuxDuPendu
                             sp.Play();
                             form.ShowDialog();
                         }
+                        joueur.Wins++;
                         sp = null;
 
 
@@ -263,6 +264,7 @@ namespace JeuxDuPendu
                             sp.Play();
                             form.ShowDialog();
                         }
+                        joueur.Fails++;
                         sp = null;
                        
                         
@@ -281,6 +283,12 @@ namespace JeuxDuPendu
 
         private void button1_Click(object sender, EventArgs e)
         {
+            using (var writer = new StreamWriter(Program.fichierSauvegarde))
+            using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
+            {
+                csv.WriteRecords(Program.joueurs);
+
+            }
             sp.Stop();
             this.Hide();
             var form = new Menu();
