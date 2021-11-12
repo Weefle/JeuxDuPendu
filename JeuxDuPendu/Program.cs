@@ -16,6 +16,10 @@ namespace JeuxDuPendu
         public static string fichierMots { get; set; } = "../../../Resources/mots.txt";
 
         public static string fichierSauvegarde { get; set; } = "../../../Resources/users.csv";
+
+        public static List<AsyncServer> servers = new List<AsyncServer>();
+
+        public static List<AsyncClient> clients = new List<AsyncClient>();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -56,6 +60,7 @@ namespace JeuxDuPendu
 
             var server = new AsyncServer();
             server.StartServer();
+            servers.Add(server);
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

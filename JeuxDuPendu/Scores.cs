@@ -26,9 +26,6 @@ namespace JeuxDuPendu
 
         public static void CreateListViewItem(DataGridView dataGridView)
         {
- 
-
-            // Other requirements as needed
 
             dataGridView.DataSource = Program.joueurs;
         }

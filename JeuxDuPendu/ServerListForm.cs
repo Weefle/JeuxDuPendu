@@ -25,5 +25,16 @@ namespace JeuxDuPendu
             form2.ShowDialog();
             this.Close();
         }
+
+        private void ServerListForm_Load(object sender, EventArgs e)
+        {
+            CreateListViewItem(dataGridView1);
+        }
+
+        public static void CreateListViewItem(DataGridView dataGridView)
+        {
+
+            dataGridView.DataSource = Program.servers;
+        }
     }
 }

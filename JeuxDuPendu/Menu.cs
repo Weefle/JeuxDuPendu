@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,11 +43,21 @@ namespace JeuxDuPendu
             var form2 = new GameForm();
             form2.Closed += (s, args) => this.Close();
             form2.Show();*/
-            this.Hide();
-            var form2 = new GameForm();
-            //form2.Closed += (s, args) => this.Close();
-            form2.ShowDialog();
-            this.Close();
+            const string message =
+       "Donnez un nom à votre serveur";
+            var result = Interaction.InputBox(message, "Création du serveur");
+
+            // If the no button was pressed ...
+            if (!string.IsNullOrEmpty(result))
+            {
+                this.Hide();
+                var form2 = new GameForm();
+                //form2.Closed += (s, args) => this.Close();
+                form2.ShowDialog();
+                this.Close();
+            }
+
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
