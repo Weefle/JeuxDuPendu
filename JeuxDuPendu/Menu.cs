@@ -125,14 +125,22 @@ namespace JeuxDuPendu
                         const string message =
          "Donnez un nom à votre serveur";
                         var res = Interaction.InputBox(message, "Création du serveur");
-
+                    AsyncServer server;
                         // If the no button was pressed ...
                         if (!string.IsNullOrEmpty(res))
                         {
-
-                            var server = new AsyncServer();
-                            server.StartServer();
+                        if (!Program.servers.Any(x => x.Name == res))
+                        {
+                            server = new AsyncServer(res);
                             Program.servers.Add(server);
+                        }
+
+                        else
+                        {
+                            server = Program.servers.Where(x => x.Name == res).First();
+                        }
+                        
+                            server.StartServer();
                             this.Hide();
                             var form2 = new GameForm(joueur);
                             /*var form3 = new GameForm();

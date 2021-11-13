@@ -10,12 +10,12 @@ namespace JeuxDuPendu
     public class AsyncServer
     {
         private const int Port = 9999;
-       /* private string name;
+        public string Name;
 
-        public AsyncServer(string name)
+        public AsyncServer(string Name)
         {
-            this.name = name;
-        }*/
+            this.Name = Name;
+        }
         public void StartServer()
         {
             var thread = new Thread(Run) { IsBackground = true };

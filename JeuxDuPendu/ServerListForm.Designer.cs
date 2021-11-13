@@ -65,7 +65,10 @@ namespace JeuxDuPendu
             this.ClientSize = new System.Drawing.Size(917, 566);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ServerListForm";
             this.Text = "ServerListForm";
             this.Load += new System.EventHandler(this.ServerListForm_Load);
