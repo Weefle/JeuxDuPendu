@@ -68,7 +68,7 @@ namespace JeuxDuPendu
                 }
 
                 this.Hide();
-                var form2 = new GameForm(joueur);
+                var form2 = new GameForm(joueur, null);
                 //form2.Closed += (s, args) => this.Close();
                 form2.ShowDialog();
                 this.Close();
@@ -142,7 +142,7 @@ namespace JeuxDuPendu
                         
                             server.StartServer();
                             this.Hide();
-                            var form2 = new GameForm(joueur);
+                            var form2 = new GameForm(joueur, server);
                             /*var form3 = new GameForm();
                             form2.Closed += (s, args) => this.Close();
                             form3.Closed += (s, args) => this.Close();
@@ -189,12 +189,7 @@ namespace JeuxDuPendu
 
         private void button5_Click(object sender, EventArgs e)
         {
-            using (var writer = new StreamWriter(Program.fichierSauvegarde))
-            using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
-            {
-                csv.WriteRecords(Program.joueurs);
-
-            }
+            //Program.RefreshData();
             this.Close();
         }
     }

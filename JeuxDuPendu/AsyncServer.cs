@@ -4,13 +4,29 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using CsvHelper.Configuration;
 
 namespace JeuxDuPendu
 {
     public class AsyncServer
     {
+
         private const int Port = 9999;
-        public string Name;
+        public string Name { get; set; }
+
+        public class AsyncServerClassMap : ClassMap<AsyncServer>
+        {
+            /// <summary>
+            ///     Constructeur permettant de mapper les champs d'un fichier CSV avec le mod�le BalgenModel
+            /// </summary>
+            public AsyncServerClassMap()
+            {
+                Map(m => m.Name).Name("Name");
+
+            }
+        }
+
+       
 
         public AsyncServer(string Name)
         {

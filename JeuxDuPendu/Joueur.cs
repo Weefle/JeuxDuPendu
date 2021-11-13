@@ -21,12 +21,12 @@ namespace JeuxDuPendu
         }
 
 
-        public class BalgenModelClassMap : ClassMap<Joueur>
+        public class JoueurClassMap : ClassMap<Joueur>
         {
             /// <summary>
             ///     Constructeur permettant de mapper les champs d'un fichier CSV avec le mod�le BalgenModel
             /// </summary>
-            public BalgenModelClassMap()
+            public JoueurClassMap()
             {
                 Map(m => m.Name).Name("Nom");
                 Map(m => m.Wins).Name("Wins");

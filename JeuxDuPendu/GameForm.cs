@@ -27,13 +27,15 @@ namespace JeuxDuPendu
         int pos = 0;
         System.Media.SoundPlayer sp;
         Joueur joueur;
+        AsyncServer? server;
 
         /// <summary>
         /// Constructeur du formulaire de jeux
         /// </summary>
-        public GameForm(Joueur joueur)
+        public GameForm(Joueur joueur, AsyncServer? server)
         {
             this.joueur = joueur;
+            this.server = server;
             InitializeComponent();
             InitializeMyComponent();
             StartNewGame();
@@ -279,16 +281,18 @@ namespace JeuxDuPendu
         private void GameForm_Load(object sender, EventArgs e)
         {
             label1.Text = joueur.Name;
+            label4.Visible = false;
+            if (server != null)
+            {
+                label4.Visible = true;
+                label4.Text = server.Name;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var writer = new StreamWriter(Program.fichierSauvegarde))
-            using (var csv = new CsvWriter(writer, CultureInfo.CurrentCulture))
-            {
-                csv.WriteRecords(Program.joueurs);
-
-            }
+            //Program.RefreshData();
+            Program.servers.Remove(Program.servers.Where(x=>x.Name == server?.Name).FirstOrDefault());
             sp.Stop();
             this.Hide();
             var form = new Menu();
