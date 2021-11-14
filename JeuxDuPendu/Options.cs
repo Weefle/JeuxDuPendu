@@ -20,6 +20,9 @@ namespace JeuxDuPendu
 
             button2.BackColor = Color.Transparent;
             button2.Parent = pictureBox1;
+
+            button3.BackColor = Color.Transparent;
+            button3.Parent = pictureBox1;
         }
 
     

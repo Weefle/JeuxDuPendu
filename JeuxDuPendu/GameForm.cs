@@ -73,6 +73,12 @@ namespace JeuxDuPendu
             label3.BackColor = Color.Transparent;
             label3.Parent = pictureBox1;
 
+            label1.BackColor = Color.Transparent;
+            label1.Parent = pictureBox1;
+
+            label4.BackColor = Color.Transparent;
+            label4.Parent = pictureBox1;
+
             /*richTextBox1.BackColor = Color.Transparent;
             richTextBox1.Parent = pictureBox1;*/
         }

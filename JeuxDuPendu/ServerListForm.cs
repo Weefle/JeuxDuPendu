@@ -15,6 +15,10 @@ namespace JeuxDuPendu
         public ServerListForm()
         {
             InitializeComponent();
+            button1.BackColor = Color.Transparent;
+            button1.Parent = pictureBox1;
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

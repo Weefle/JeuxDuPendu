@@ -15,6 +15,10 @@ namespace JeuxDuPendu
         public Scores()
         {
             InitializeComponent();
+            button1.BackColor = Color.Transparent;
+            button1.Parent = pictureBox1;
+
+         
         }
 
         private void Scores_Load(object sender, EventArgs e)
