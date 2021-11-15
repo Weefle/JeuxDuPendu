@@ -10,7 +10,7 @@ namespace JeuxDuPendu
     public class AsyncClient
     {
         private const int Port = 9999;
-        private readonly string _clientId;
+        public string _clientId { get; set; }
         private readonly Random _random;
 
         public AsyncClient(int clientId)

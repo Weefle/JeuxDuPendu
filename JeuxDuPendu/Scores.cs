@@ -30,8 +30,10 @@ namespace JeuxDuPendu
 
         public static void CreateListViewItem(DataGridView dataGridView)
         {
-
-            dataGridView.DataSource = Program.joueurs;
+            using (var db = new BloggingContext())
+            {
+                dataGridView.DataSource = db.joueurs.ToList<Joueur>();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

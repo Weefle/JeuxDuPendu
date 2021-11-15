@@ -21,8 +21,6 @@ namespace JeuxDuPendu
             button2.BackColor = Color.Transparent;
             button2.Parent = pictureBox1;
 
-            button3.BackColor = Color.Transparent;
-            button3.Parent = pictureBox1;
         }
 
     
@@ -52,15 +50,6 @@ namespace JeuxDuPendu
             
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            openFileDialog2.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + @"\..\..\..\Resources\");
-            if (openFileDialog2.ShowDialog() == DialogResult.OK)
-            {
-               // Stream stream = openFileDialog2.OpenFile();
-                //TODO lire le fichier
-                Program.fichierSauvegarde = openFileDialog2.FileName;
-            }
-        }
+      
     }
 }

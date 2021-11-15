@@ -37,14 +37,20 @@ namespace JeuxDuPendu
 
         public static void CreateListViewItem(DataGridView dataGridView)
         {
-     
-            dataGridView.DataSource = Program.servers;
+            using (var db = new BloggingContext())
+            {
+                //dataGridView.DataSource = Program.servers;
+                dataGridView.DataSource = db.servers.ToList();
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var selectedServer = Program.servers[e.RowIndex];
-            AsyncClient client;
+            using (var db = new BloggingContext())
+            {
+                var selectedServer = db.servers.ToList()[e.RowIndex];
+                AsyncClient client;
+            }
            /* do
             {
                 client = new AsyncClient(e.RowIndex);

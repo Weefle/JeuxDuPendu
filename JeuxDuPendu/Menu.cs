@@ -1,5 +1,4 @@
-﻿using CsvHelper;
-using Microsoft.VisualBasic;
+﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,24 +54,26 @@ namespace JeuxDuPendu
             // If the no button was pressed ...
             if (!string.IsNullOrEmpty(reslt))
             {
-
-                if (!Program.joueurs.Any(x => x.Name == reslt))
+                using (var db = new BloggingContext())
                 {
-                    joueur = new Joueur(reslt, 0, 0);
-                    Program.joueurs.Add(joueur);
+                    if (!db.joueurs.Any(x => x.Name == reslt))
+                    {
+                        joueur = new Joueur(reslt, 0, 0);
+                        db.joueurs.Add(joueur);
+                        db.SaveChanges();
+                    }
+
+                    else
+                    {
+                        joueur = db.joueurs.Where(x => x.Name == reslt).First();
+                    }
+
+                    this.Hide();
+                    var form2 = new GameForm(joueur, null);
+                    //form2.Closed += (s, args) => this.Close();
+                    form2.ShowDialog();
+                    this.Close();
                 }
-
-                else
-                {
-                    joueur = Program.joueurs.Where(x => x.Name == reslt).First();
-                }
-
-                this.Hide();
-                var form2 = new GameForm(joueur, null);
-                //form2.Closed += (s, args) => this.Close();
-                form2.ShowDialog();
-                this.Close();
-
             }
             
         }
@@ -98,72 +99,77 @@ namespace JeuxDuPendu
             // If the no button was pressed ...
             if (!string.IsNullOrEmpty(reslt))
             {
-               
-                if (!Program.joueurs.Any(x => x.Name == reslt))
+                using (var db = new BloggingContext())
+                {
+
+                    if (!db.joueurs.Any(x => x.Name == reslt))
                 {
                     joueur = new Joueur(reslt, 0, 0);
-                    Program.joueurs.Add(joueur);
-                }
+                        db.joueurs.Add(joueur);
+                        db.SaveChanges();
+                    }
 
                 else
                 {
-                    joueur = Program.joueurs.Where(x => x.Name == reslt).First();
+                    joueur = db.joueurs.Where(x => x.Name == reslt).First();
                 }
 
 
 
                 const string msg =
                 "Voulez vous créer un serveur ?";
-                    const string caption = "Multijoueur";
-                    var result = MessageBox.Show(msg, caption,
-                                                 MessageBoxButtons.YesNo,
-                                                 MessageBoxIcon.Question);
+                const string caption = "Multijoueur";
+                var result = MessageBox.Show(msg, caption,
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
 
 
-                    if (result == DialogResult.Yes)
-                    {
-                        const string message =
-         "Donnez un nom à votre serveur";
-                        var res = Interaction.InputBox(message, "Création du serveur");
+                if (result == DialogResult.Yes)
+                {
+                    const string message =
+     "Donnez un nom à votre serveur";
+                    var res = Interaction.InputBox(message, "Création du serveur");
                     AsyncServer server;
-                        // If the no button was pressed ...
-                        if (!string.IsNullOrEmpty(res))
-                        {
-                        if (!Program.servers.Any(x => x.Name == res))
-                        {
-                            server = new AsyncServer(res);
-                            Program.servers.Add(server);
-                        }
-
-                        else
-                        {
-                            server = Program.servers.Where(x => x.Name == res).First();
-                        }
-                        
-                            server.StartServer();
-                            this.Hide();
-                            var form2 = new GameForm(joueur, server);
-                            /*var form3 = new GameForm();
-                            form2.Closed += (s, args) => this.Close();
-                            form3.Closed += (s, args) => this.Close();
-                            form2.Show();*/
-                            form2.ShowDialog();
-                            this.Close();
-                        }
-                    }
-                    else if (result == DialogResult.No)
+                    // If the no button was pressed ...
+                    if (!string.IsNullOrEmpty(res))
                     {
-                        this.Hide();
-                        var form2 = new ServerListForm();
-                        /*var form3 = new GameForm();
-                        form2.Closed += (s, args) => this.Close();
-                        form3.Closed += (s, args) => this.Close();
-                        form2.Show();*/
-                        form2.ShowDialog();
-                        this.Close();
+                        using (var db1 = new BloggingContext())
+                        {
+                                
+                             if (!db1.servers.Any(x => x.Name == res))
+                         {
+                             server = new AsyncServer(res);
+                                    db1.servers.Add(server);
+                                    db1.SaveChanges();
+                                }
+
+                         else
+                         {
+                             server = db1.servers.Where(x => x.Name == res).First();
+                         }
+
+                         server.StartServer();
+                         this.Hide();
+                         var form2 = new GameForm(joueur, server);
+
+                         form2.ShowDialog();
+                         this.Close();
+                        }
                     }
+                }
+                else if (result == DialogResult.No)
+                {
+                    this.Hide();
+                    var form2 = new ServerListForm();
+                    /*var form3 = new GameForm();
+                    form2.Closed += (s, args) => this.Close();
+                    form3.Closed += (s, args) => this.Close();
+                    form2.Show();*/
+                    form2.ShowDialog();
+                    this.Close();
+                }
 
-
+            }
             }
            
     }

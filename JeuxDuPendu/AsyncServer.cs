@@ -1,10 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using CsvHelper.Configuration;
 
 namespace JeuxDuPendu
 {
@@ -12,19 +12,9 @@ namespace JeuxDuPendu
     {
 
         private const int Port = 9999;
-        public string Name { get; set; }
+        [Key] public string Name { get; set; }
 
-        public class AsyncServerClassMap : ClassMap<AsyncServer>
-        {
-            /// <summary>
-            ///     Constructeur permettant de mapper les champs d'un fichier CSV avec le mod�le BalgenModel
-            /// </summary>
-            public AsyncServerClassMap()
-            {
-                Map(m => m.Name).Name("Name");
-
-            }
-        }
+ 
 
        
 
@@ -47,7 +37,21 @@ namespace JeuxDuPendu
             {
                 Debug.WriteLine("Before Accept");
                 var state = new ServerState { WorkSocket = tcpListener.AcceptSocket() };
-                Debug.WriteLine("Before Recieve");
+                Debug.WriteLine("Before Receive");
+                Receive(state);
+            }
+        }
+
+        private void Stop()
+        {
+            Debug.WriteLine("Running");
+            var tcpListener = new TcpListener(IPAddress.Loopback, Port);
+            tcpListener.Start();
+            while (true)
+            {
+                Debug.WriteLine("Before Accept");
+                var state = new ServerState { WorkSocket = tcpListener.AcceptSocket() };
+                Debug.WriteLine("Before Receive");
                 Receive(state);
             }
         }

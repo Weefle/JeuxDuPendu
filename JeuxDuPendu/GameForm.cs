@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using CsvHelper;
 using JeuxDuPendu.MyControls;
 
 namespace JeuxDuPendu
@@ -88,6 +87,13 @@ namespace JeuxDuPendu
         /// </summary>
         public void StartNewGame()
         {
+            using (var db = new BloggingContext())
+            {
+
+                db.joueurs.Update(joueur);
+                db.SaveChanges();
+
+            }
             foreach (PictureBox item in _wrongPictures)
             {
 
@@ -211,6 +217,7 @@ namespace JeuxDuPendu
                             form.ShowDialog();
                         }
                         joueur.Wins++;
+                       
                         sp = null;
 
 
@@ -273,6 +280,7 @@ namespace JeuxDuPendu
                             form.ShowDialog();
                         }
                         joueur.Fails++;
+                   
                         sp = null;
                        
                         
@@ -298,7 +306,16 @@ namespace JeuxDuPendu
         private void button1_Click(object sender, EventArgs e)
         {
             //Program.RefreshData();
-            Program.servers.Remove(Program.servers.Where(x=>x.Name == server?.Name).FirstOrDefault());
+            using (var db = new BloggingContext())
+            {
+                if (server != null)
+                {
+                    db.servers.Remove(server);
+                    db.SaveChanges();
+                    //db.servers.Remove(db.servers.Where(x => x.Name == server.Name).FirstOrDefault());
+                }
+            }
+             
             sp.Stop();
             this.Hide();
             var form = new Menu();
