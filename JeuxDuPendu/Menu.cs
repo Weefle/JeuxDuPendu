@@ -148,19 +148,20 @@ namespace JeuxDuPendu
                              server = db1.servers.Where(x => x.Name == res).First();
                          }
 
-                         server.StartServer();
-                         this.Hide();
-                         var form2 = new GameForm(joueur, server);
-
-                         form2.ShowDialog();
-                         this.Close();
+                         
                         }
-                    }
+                            server.StartServer();
+                            this.Hide();
+                            var form2 = new GameForm(joueur, server);
+
+                            form2.ShowDialog();
+                            this.Close();
+                        }
                 }
                 else if (result == DialogResult.No)
                 {
                     this.Hide();
-                    var form2 = new ServerListForm();
+                    var form2 = new ServerListForm(joueur);
                     /*var form3 = new GameForm();
                     form2.Closed += (s, args) => this.Close();
                     form3.Closed += (s, args) => this.Close();

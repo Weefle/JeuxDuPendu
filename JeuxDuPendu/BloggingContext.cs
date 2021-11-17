@@ -8,8 +8,6 @@ namespace JeuxDuPendu
 
         public DbSet<AsyncServer> servers { get; set; }
 
-        //public DbSet<AsyncClient> clients { get; set; }
-
         public DbSet<Joueur> joueurs { get; set; }
 
     public string DbPath { get; private set; }

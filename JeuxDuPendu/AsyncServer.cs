@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net;
@@ -13,6 +14,7 @@ namespace JeuxDuPendu
 
         private const int Port = 9999;
         [Key] public string Name { get; set; }
+        public List<AsyncClient> clients { get; set; }
 
  
 
@@ -21,6 +23,7 @@ namespace JeuxDuPendu
         public AsyncServer(string Name)
         {
             this.Name = Name;
+            this.clients = new List<AsyncClient>();
         }
         public void StartServer()
         {

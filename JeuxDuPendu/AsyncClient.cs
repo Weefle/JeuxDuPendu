@@ -4,19 +4,18 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Text;
 using System.Diagnostics;
+using System.ComponentModel.DataAnnotations;
 
 namespace JeuxDuPendu
 {
     public class AsyncClient
     {
         private const int Port = 9999;
-        public string _clientId { get; set; }
-        private readonly Random _random;
+        [Key] public string Name { get; set; }
 
-        public AsyncClient(int clientId)
+        public AsyncClient(string Name)
         {
-            _clientId = string.Format("Client Id: {0}", clientId);
-            _random = new Random(clientId);
+            this.Name = Name;
         }
 
         public void StartClient()
@@ -56,15 +55,15 @@ namespace JeuxDuPendu
                 Debug.WriteLine("From Server: " + receivedString);
                 Array.Clear(state.Buffer, 0, state.Buffer.Length);
                 state.Count++;
-                Thread.Sleep(1000 + _random.Next(2000));
+                Thread.Sleep(1000);
                 Send(state);
             }
         }
 
         private void Send(ClientState clientState)
         {
-            Debug.WriteLine("Sending " + _clientId);
-            byte[] buffer = Encoding.UTF8.GetBytes(string.Format("Send from Thread {0} Client id {1} Count {2}", Thread.CurrentThread.ManagedThreadId, _clientId, clientState.Count));
+            Debug.WriteLine("Sending " + Name);
+            byte[] buffer = Encoding.UTF8.GetBytes(string.Format("Send from Thread {0} Client id {1} Count {2}", Thread.CurrentThread.ManagedThreadId, Name, clientState.Count));
             clientState.WorkSocket.BeginSend(buffer, 0, buffer.Length, 0, BeginSendCallBack, clientState);
         }
 

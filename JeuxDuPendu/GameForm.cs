@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using JeuxDuPendu.MyControls;
 
@@ -296,12 +294,17 @@ namespace JeuxDuPendu
         {
             label1.Text = joueur.Name;
             label4.Visible = false;
+            dataGridView1.Visible = false;
             if (server != null)
             {
                 label4.Visible = true;
                 label4.Text = server.Name;
+                dataGridView1.Visible = true;
+                timer1.Enabled = true;
             }
         }
+
+     
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -310,12 +313,26 @@ namespace JeuxDuPendu
             {
                 if (server != null)
                 {
-                    db.servers.Remove(server);
+              
+                    
+                
+                    if(db.servers.Where(x => x.Name == server.Name).First().clients.Any(x => x.Name == joueur.Name))
+                    {
+                        db.servers.Where(x => x.Name == server.Name).First().clients.Remove(db.servers.Where(x => x.Name == server.Name).First().clients.Where(x => x.Name == joueur.Name).First());
+
+                    }
+                    else
+                    {
+                        db.servers.Remove(server);
+                    }
+                    
                     db.SaveChanges();
+
                     //db.servers.Remove(db.servers.Where(x => x.Name == server.Name).FirstOrDefault());
                 }
             }
-             
+            timer1.Enabled = false;
+
             sp.Stop();
             this.Hide();
             var form = new Menu();
@@ -355,6 +372,14 @@ namespace JeuxDuPendu
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            using (var db = new BloggingContext())
+            {
+                dataGridView1.DataSource = db.servers.Where(x => x.Name == server.Name).First().clients.ToList();
+            }
         }
     }
 
