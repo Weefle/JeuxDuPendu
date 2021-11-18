@@ -53,15 +53,15 @@ namespace JeuxDuPendu
                 server = db.servers.ToList()[e.RowIndex];
 
 
-                if (!db.servers.Where(x => x.Name == server.Name).First().clients.Any(x => x.Name == joueur.Name))
+                if (!db.clients.Any(x => x.Name == joueur.Name))
                 {
                     client = new AsyncClient(joueur.Name);
-                    db.servers.Where(x => x.Name == server.Name).First().clients.Add(client);
+                    db.clients.Add(client);
                     db.SaveChanges();
                 }
                 else
                 {
-                    client = db.servers.Where(x => x.Name == server.Name).First().clients.Where(x => x.Name == joueur.Name).First();
+                    client = db.clients.Where(x => x.Name == joueur.Name).First();
                 }
 
                 

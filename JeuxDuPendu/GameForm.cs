@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using JeuxDuPendu.MyControls;
+using Microsoft.EntityFrameworkCore;
 
 namespace JeuxDuPendu
 {
@@ -313,19 +314,25 @@ namespace JeuxDuPendu
             {
                 if (server != null)
                 {
-              
-                    
-                
-                    if(db.servers.Where(x => x.Name == server.Name).First().clients.Any(x => x.Name == joueur.Name))
+
+                    if (db.clients.Any(x => x.Name == joueur.Name))
                     {
-                        db.servers.Where(x => x.Name == server.Name).First().clients.Remove(db.servers.Where(x => x.Name == server.Name).First().clients.Where(x => x.Name == joueur.Name).First());
+
+                        db.clients.Remove(db.clients.Where(x => x.Name == joueur.Name).First());
 
                     }
                     else
                     {
+                        db.servers.AsNoTracking().Where(x => x.Name == server.Name).First().Stop();
+                      
+
                         db.servers.Remove(server);
+                      
+
+                        db.clients.RemoveRange(db.clients);
+                       
                     }
-                    
+
                     db.SaveChanges();
 
                     //db.servers.Remove(db.servers.Where(x => x.Name == server.Name).FirstOrDefault());
@@ -378,7 +385,15 @@ namespace JeuxDuPendu
         {
             using (var db = new BloggingContext())
             {
-                dataGridView1.DataSource = db.servers.Where(x => x.Name == server.Name).First().clients.ToList();
+                if (db.clients.Any())
+                {
+                    dataGridView1.DataSource = db.clients.ToList();
+                }
+                else if(!db.servers.Contains(server))
+                {
+                    this.Close();
+                }
+                
             }
         }
     }

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace JeuxDuPendu
 {
@@ -14,7 +13,7 @@ namespace JeuxDuPendu
 
         private const int Port = 9999;
         [Key] public string Name { get; set; }
-        public List<AsyncClient> clients { get; set; }
+        public TcpListener? tcpListener;
 
  
 
@@ -23,45 +22,37 @@ namespace JeuxDuPendu
         public AsyncServer(string Name)
         {
             this.Name = Name;
-            this.clients = new List<AsyncClient>();
+            tcpListener = new TcpListener(IPAddress.Loopback, Port);
         }
-        public void StartServer()
+        public async Task StartServer()
         {
-            var thread = new Thread(Run) { IsBackground = true };
-            thread.Start();
+            await Task.Run(Run);
         }
 
         private void Run()
         {
             Debug.WriteLine("Running");
-            var tcpListener = new TcpListener(IPAddress.Loopback, Port);
-            tcpListener.Start();
+            tcpListener?.Start();
             while (true)
             {
                 Debug.WriteLine("Before Accept");
-                var state = new ServerState { WorkSocket = tcpListener.AcceptSocket() };
+                var state = new ServerState { WorkSocket = tcpListener?.AcceptSocket() };
                 Debug.WriteLine("Before Receive");
                 Receive(state);
             }
         }
 
-        private void Stop()
+        public void Stop()
         {
-            Debug.WriteLine("Running");
-            var tcpListener = new TcpListener(IPAddress.Loopback, Port);
-            tcpListener.Start();
-            while (true)
-            {
-                Debug.WriteLine("Before Accept");
-                var state = new ServerState { WorkSocket = tcpListener.AcceptSocket() };
-                Debug.WriteLine("Before Receive");
-                Receive(state);
-            }
+
+            tcpListener?.Server?.Close();
+
         }
+
 
         private void Receive(ServerState state)
         {
-            state.WorkSocket.BeginReceive(state.Buffer, 0, ServerState.BufferSize, 0, ReceiveCallBack, state);
+            state.WorkSocket?.BeginReceive(state.Buffer, 0, ServerState.BufferSize, 0, ReceiveCallBack, state);
         }
 
         private void ReceiveCallBack(IAsyncResult ar)
@@ -89,11 +80,11 @@ namespace JeuxDuPendu
         }
 
 
-        private class ServerState
+        public class ServerState
         {
             public const int BufferSize = 1024;
             public readonly byte[] Buffer = new byte[1024];
-            public Socket WorkSocket;
+            public Socket? WorkSocket;
         }
     }
     

@@ -20,14 +20,9 @@ namespace JeuxDuPendu.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("AsyncServerName")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Name");
 
-                    b.HasIndex("AsyncServerName");
-
-                    b.ToTable("AsyncClient");
+                    b.ToTable("clients");
                 });
 
             modelBuilder.Entity("JeuxDuPendu.AsyncServer", b =>
@@ -54,18 +49,6 @@ namespace JeuxDuPendu.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("joueurs");
-                });
-
-            modelBuilder.Entity("JeuxDuPendu.AsyncClient", b =>
-                {
-                    b.HasOne("JeuxDuPendu.AsyncServer", null)
-                        .WithMany("clients")
-                        .HasForeignKey("AsyncServerName");
-                });
-
-            modelBuilder.Entity("JeuxDuPendu.AsyncServer", b =>
-                {
-                    b.Navigation("clients");
                 });
 #pragma warning restore 612, 618
         }

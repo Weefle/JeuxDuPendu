@@ -7,6 +7,17 @@ namespace JeuxDuPendu.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "clients",
+                columns: table => new
+                {
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_clients", x => x.Name);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "joueurs",
                 columns: table => new
                 {
@@ -33,6 +44,9 @@ namespace JeuxDuPendu.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "clients");
+
             migrationBuilder.DropTable(
                 name: "joueurs");
 
