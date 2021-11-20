@@ -15,9 +15,9 @@ namespace JeuxDuPendu
 
         public BloggingContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
+            var folder = Environment.SpecialFolder.MyDocuments;
             var path = Environment.GetFolderPath(folder);
-            DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}blogging.db";
+            DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}game.db";
         }
 
         // The following configures EF to create a Sqlite database file in the

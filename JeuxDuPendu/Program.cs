@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JeuxDuPendu
 {
@@ -22,6 +24,11 @@ namespace JeuxDuPendu
         [STAThread]
         static void Main()
         {
+            using (var context = new BloggingContext())
+            {
+                context.Database.EnsureCreated();
+                
+            }
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
