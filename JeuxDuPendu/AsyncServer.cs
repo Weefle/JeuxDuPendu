@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,7 +12,7 @@ namespace JeuxDuPendu
     public class AsyncServer
     {
 
-        private const int Port = 9999;
+        public int Port { get; set; }
         [Key] public string Name { get; set; }
         public TcpListener? tcpListener;
 
@@ -22,11 +23,36 @@ namespace JeuxDuPendu
         public AsyncServer(string Name)
         {
             this.Name = Name;
+            this.Port = FindNextPort();
             tcpListener = new TcpListener(IPAddress.Loopback, Port);
         }
         public async Task StartServer()
         {
             await Task.Run(Run);
+        }
+
+        public int FindNextPort()
+        {
+
+            int serverport = new Random().Next(3000) + (6000 - 3000);
+            while (IsUsedPort(serverport))
+            {
+                serverport = new Random().Next(3000) + (6000 - 3000);
+            }
+
+            return serverport;
+        }
+
+        public static bool IsUsedPort(int port)
+        {
+            using (var db = new BloggingContext())
+            {
+
+                return db.servers.Any(x => x.Port == port);
+         
+
+            }
+       
         }
 
         private void Run()

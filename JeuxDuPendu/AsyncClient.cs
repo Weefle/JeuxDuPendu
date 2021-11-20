@@ -10,12 +10,13 @@ namespace JeuxDuPendu
 {
     public class AsyncClient
     {
-        private const int Port = 9999;
+        public int Port { get; set; }
         [Key] public string Name { get; set; }
 
-        public AsyncClient(string Name)
+        public AsyncClient(string Name, int Port)
         {
             this.Name = Name;
+            this.Port = Port;
         }
 
         public void StartClient()

@@ -20,6 +20,9 @@ namespace JeuxDuPendu.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Port")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Name");
 
                     b.ToTable("clients");
@@ -29,6 +32,9 @@ namespace JeuxDuPendu.Migrations
                 {
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Port")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Name");
 

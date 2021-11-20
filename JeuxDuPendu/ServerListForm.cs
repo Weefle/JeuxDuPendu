@@ -55,7 +55,7 @@ namespace JeuxDuPendu
 
                 if (!db.clients.Any(x => x.Name == joueur.Name))
                 {
-                    client = new AsyncClient(joueur.Name);
+                    client = new AsyncClient(joueur.Name, server.Port);
                     db.clients.Add(client);
                     db.SaveChanges();
                 }

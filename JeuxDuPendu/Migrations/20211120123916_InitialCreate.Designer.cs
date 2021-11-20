@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeuxDuPendu.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20211120103437_InitialCreate")]
+    [Migration("20211120123916_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,9 @@ namespace JeuxDuPendu.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Port")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Name");
 
                     b.ToTable("clients");
@@ -31,6 +34,9 @@ namespace JeuxDuPendu.Migrations
                 {
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Port")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Name");
 
