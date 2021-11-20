@@ -220,7 +220,46 @@ namespace JeuxDuPendu
                         sp = null;
 
 
-                        StartNewGame();
+                        if (server != null)
+                        {
+                            using (var db = new BloggingContext())
+                            {
+                               
+
+                                    if (db.clients.Any(x => x.Name == joueur.Name))
+                                    {
+
+                                        db.clients.Remove(db.clients.AsNoTracking().Where(x => x.Name == joueur.Name).First());
+
+                                    }
+                                    else
+                                    {
+                                        db.servers.AsNoTracking().Where(x => x.Name == server.Name).First().Stop();
+
+
+                                        db.servers.Remove(server);
+
+
+                                        db.clients.RemoveRange(db.clients);
+
+                                    }
+
+                                    db.SaveChanges();
+
+                                
+                            }
+                            timer1.Enabled = false;
+
+                        
+                            this.Hide();
+                            var form = new Menu();
+                            form.ShowDialog();
+                            this.Close();
+                        }
+                        else
+                        {
+                            StartNewGame();
+                        }
                     }
                     //TODO corriger decrementation nombre de lettres
                     if (!before.Contains(letter))
@@ -281,11 +320,49 @@ namespace JeuxDuPendu
                         joueur.Fails++;
                    
                         sp = null;
+
+
+                        if (server != null)
+                        {
+                            using (var db = new BloggingContext())
+                            {
+                             
+
+                                    if (db.clients.Any(x => x.Name == joueur.Name))
+                                    {
+
+                                        db.clients.Remove(db.clients.AsNoTracking().Where(x => x.Name == joueur.Name).First());
+
+                                    }
+                                    else
+                                    {
+                                        db.servers.AsNoTracking().Where(x => x.Name == server.Name).First().Stop();
+
+
+                                        db.servers.Remove(server);
+
+
+                                        db.clients.RemoveRange(db.clients);
+
+                                    }
+
+                                    db.SaveChanges();
+
+                                
+                            }
+                            timer1.Enabled = false;
+
                        
-                        
-                        
-                        //MessageBox.Show("Vous avez perdu !");
-                        StartNewGame();
+                            this.Hide();
+                            var form = new Menu();
+                            form.ShowDialog();
+                            this.Close();
+                        }
+                        else {
+                            StartNewGame();
+                        }
+                  
+                       
                     }
                 }
             }
@@ -309,7 +386,7 @@ namespace JeuxDuPendu
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Program.RefreshData();
+         
             using (var db = new BloggingContext())
             {
                 if (server != null)
@@ -335,7 +412,6 @@ namespace JeuxDuPendu
 
                     db.SaveChanges();
 
-                    //db.servers.Remove(db.servers.Where(x => x.Name == server.Name).FirstOrDefault());
                 }
             }
             timer1.Enabled = false;
@@ -346,28 +422,7 @@ namespace JeuxDuPendu
             form.ShowDialog();
             this.Close();
 
-            /*if (Application.OpenForms.Count > 1)
-            {
-                for (int i = 0; i < Application.OpenForms.Count; i++)
-                {
-                    Application.OpenForms[i].Close();
-                }
-                var form2 = new Menu();
-                form2.Show();
-            }
-            else
-            {
           
-                var form3 = new Menu();
-                form3.Closed += (s, args) => this.Close();
-                form3.Show();
-            }*/
-           
-
-            /* this.Hide();
-             var form2 = new Menu();
-             Application.OpenForms.Cast<Form>().ToList().ForEach(x => form2.Closed += (s, args) => x.Close());
-             form2.Show();*/
 
         }
 
@@ -385,11 +440,10 @@ namespace JeuxDuPendu
         {
             using (var db = new BloggingContext())
             {
-                if (db.clients.Any())
-                {
+              
                     dataGridView1.DataSource = db.clients.ToList();
-                }
-                else if(!db.servers.Contains(server))
+                
+                if(!db.servers.Contains(server))
                 {
                     this.Close();
                 }

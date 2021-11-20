@@ -35,11 +35,7 @@ namespace JeuxDuPendu
 
         private void ServerListForm_Load(object sender, EventArgs e)
         {
-            using (var db = new BloggingContext())
-            {
-                //dataGridView.DataSource = Program.servers;
-                dataGridView1.DataSource = db.servers.ToList();
-            }
+        
         }
 
   
@@ -73,6 +69,18 @@ namespace JeuxDuPendu
             form2.ShowDialog();
             this.Close();
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            using (var db = new BloggingContext())
+            {
+
+                dataGridView1.DataSource = db.servers.ToList();
+
+            
+
+            }
         }
     }
 }
