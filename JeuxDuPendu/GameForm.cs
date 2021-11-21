@@ -223,7 +223,8 @@ namespace JeuxDuPendu
                                 if (db.clients.Any(x => x.Name == joueur.Name))
                                     {
 
-                                        db.clients.Remove(db.clients.AsNoTracking().Where(x => x.Name == joueur.Name).First());
+                                    db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First().Stop();
+                                    db.clients.Remove(db.clients.AsNoTracking().Where(x => x.Name == joueur.Name).First());
 
                                     }
                                     if(db.servers.Any(x => x.Name == server.Name))
@@ -329,7 +330,7 @@ namespace JeuxDuPendu
 
                                 if (db.clients.Any(x => x.Name == joueur.Name && x.Port == server.Port))
                                 {
-
+                                    db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First().Stop();
                                     db.clients.Remove(db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First());
 
                                 }
@@ -402,6 +403,7 @@ namespace JeuxDuPendu
                     if (db.clients.Any(x => x.Name == joueur.Name && x.Port == server.Port))
                     {
 
+                        db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First().Stop();
                         db.clients.Remove(db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First());
 
                     }
@@ -459,7 +461,7 @@ namespace JeuxDuPendu
                     form.ShowDialog();
                     this.Close();
                 }
-                dataGridView1.DataSource = db.clients.AsNoTracking().Where(x => x.Port == server.Port).ToList();
+                dataGridView1.DataSource = db.clients.AsNoTracking().Where(x => x.Port == server!.Port).ToList();
 
             }
         }

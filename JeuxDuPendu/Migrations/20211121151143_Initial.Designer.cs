@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeuxDuPendu.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20211120123916_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20211121151143_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

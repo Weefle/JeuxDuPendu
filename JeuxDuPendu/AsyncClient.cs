@@ -13,19 +13,27 @@ namespace JeuxDuPendu
         public int Port { get; set; }
         [Key] public string Name { get; set; }
 
+        public Socket? Socket;
+
         public AsyncClient(string Name, int Port)
         {
             this.Name = Name;
             this.Port = Port;
+            this.Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
+
+        public void Stop()
+        {
+            Socket?.Close();
         }
 
         public void StartClient()
         {
             try
             {
-                var workSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                var state = new ClientState { WorkSocket = workSocket };
-                workSocket.BeginConnect(new IPEndPoint(IPAddress.Loopback, Port), ConnectCallBack, state);
+                
+                var state = new ClientState { WorkSocket = Socket! };
+                Socket?.BeginConnect(new IPEndPoint(IPAddress.Loopback, Port), ConnectCallBack, state);
             }
             catch (Exception ex)
             {
