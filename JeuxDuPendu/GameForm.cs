@@ -327,23 +327,22 @@ namespace JeuxDuPendu
                             {
 
 
-
-
-                                if (db.clients.Any(x => x.Name == joueur.Name))
+                                if (db.clients.Any(x => x.Name == joueur.Name && x.Port == server.Port))
                                 {
 
-                                    db.clients.Remove(db.clients.AsNoTracking().Where(x => x.Name == joueur.Name).First());
+                                    db.clients.Remove(db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First());
 
                                 }
                                 if (db.servers.Any(x => x.Name == server.Name))
                                 {
+                                    
                                     db.servers.AsNoTracking().Where(x => x.Name == server.Name).First().Stop();
 
 
                                     db.servers.Remove(server);
 
 
-                                    db.clients.RemoveRange(db.clients);
+                                    db.clients.RemoveRange(db.clients.AsNoTracking().Where(x => x.Port == server.Port));
 
                                 }
 
@@ -400,10 +399,10 @@ namespace JeuxDuPendu
                 if (server != null)
                 {
 
-                    if (db.clients.Any(x => x.Name == joueur.Name))
+                    if (db.clients.Any(x => x.Name == joueur.Name && x.Port == server.Port))
                     {
 
-                        db.clients.Remove(db.clients.Where(x => x.Name == joueur.Name).First());
+                        db.clients.Remove(db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First());
 
                     }
                     else
@@ -414,7 +413,7 @@ namespace JeuxDuPendu
                         db.servers.Remove(server);
                       
 
-                        db.clients.RemoveRange(db.clients);
+                        db.clients.RemoveRange(db.clients.AsNoTracking().Where(x=>x.Port == server.Port));
                        
                     }
 
@@ -449,7 +448,7 @@ namespace JeuxDuPendu
             using (var db = new BloggingContext())
             {
               
-                    dataGridView1.DataSource = db.clients.ToList();
+                    
                 
                 if(!db.servers.Contains(server))
                 {
@@ -460,7 +459,8 @@ namespace JeuxDuPendu
                     form.ShowDialog();
                     this.Close();
                 }
-                
+                dataGridView1.DataSource = db.clients.AsNoTracking().Where(x => x.Port == server.Port).ToList();
+
             }
         }
     }
