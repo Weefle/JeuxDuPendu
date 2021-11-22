@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace JeuxDuPendu
 {
@@ -117,14 +119,15 @@ namespace JeuxDuPendu
 
 
                 const string msg =
-                "Voulez vous créer un serveur ?";
+                "Voulez vous créer un serveur ou rejoindre un serveur ?";
                 const string caption = "Multijoueur";
-                var result = MessageBox.Show(msg, caption,
-                                             MessageBoxButtons.YesNo,
-                                             MessageBoxIcon.Question);
+                    /*var result = MessageBox.Show(msg, caption,
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);*/
+                    var result = DialogBox(caption, msg, null, "Créer", "Rejoindre", null);
 
 
-                if (result == DialogResult.Yes)
+                if (result == DialogResult.OK)
                 {
                     const string message =
      "Donnez un nom à votre serveur";
@@ -158,7 +161,7 @@ namespace JeuxDuPendu
                             this.Close();
                         }
                 }
-                else if (result == DialogResult.No)
+                else if (result == DialogResult.Cancel)
                 {
                     this.Hide();
                     var form2 = new ServerListForm(joueur);
@@ -174,6 +177,82 @@ namespace JeuxDuPendu
             }
            
     }
+
+        public static DialogResult DialogBox(string title, string promptText, string value, string button1 = "OK", string button2 = "Cancel", string button3 = null)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button button_1 = new Button();
+            Button button_2 = new Button();
+            Button button_3 = new Button();
+
+            int buttonStartPos = 228; //Standard two button position
+
+
+            if (button3 != null)
+                buttonStartPos = 228 - 85;
+            else
+            {
+                button_3.Visible = false;
+                button_3.Enabled = false;
+            }
+
+
+            form.Text = title;
+
+            // Label
+            label.Text = promptText;
+            label.SetBounds(9, 20, 372, 13);
+            label.Font = new Font("Microsoft Tai Le", 10, FontStyle.Regular);
+
+            // TextBox
+            if (value == null)
+            {
+            }
+            else
+            {
+                textBox.Text = value;
+                textBox.SetBounds(12, 36, 372, 20);
+                textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            }
+
+            button_1.Text = button1;
+            button_2.Text = button2;
+            button_3.Text = button3 ?? string.Empty;
+            button_1.DialogResult = DialogResult.OK;
+            button_2.DialogResult = DialogResult.Cancel;
+            button_3.DialogResult = DialogResult.Yes;
+
+
+            button_1.SetBounds(buttonStartPos, 75, 80, 40);
+            button_2.SetBounds(buttonStartPos + 85, 75, 85, 40);
+            button_3.SetBounds(buttonStartPos + (2 * 85), 75, 80, 40);
+
+            label.AutoSize = true;
+            button_1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button_2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button_3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(400, 150);
+            form.Controls.AddRange(new Control[] { label, button_1, button_2 });
+            if (button3 != null)
+                form.Controls.Add(button_3);
+            if (value != null)
+                form.Controls.Add(textBox);
+
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = button_1;
+            form.CancelButton = button_2;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
+        }
 
         private void Menu_Load(object sender, EventArgs e)
         {
