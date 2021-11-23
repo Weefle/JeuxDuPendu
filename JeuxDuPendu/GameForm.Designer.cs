@@ -47,18 +47,18 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(432, 16);
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.panel1.Location = new System.Drawing.Point(378, 12);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(330, 403);
+            this.panel1.Size = new System.Drawing.Size(289, 302);
             this.panel1.TabIndex = 0;
             // 
             // bReset
             // 
-            this.bReset.Location = new System.Drawing.Point(490, 596);
-            this.bReset.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.bReset.Location = new System.Drawing.Point(429, 447);
+            this.bReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.bReset.Name = "bReset";
-            this.bReset.Size = new System.Drawing.Size(120, 53);
+            this.bReset.Size = new System.Drawing.Size(105, 40);
             this.bReset.TabIndex = 1;
             this.bReset.Text = "Nouvelle partie";
             this.bReset.UseVisualStyleBackColor = true;
@@ -69,10 +69,10 @@
             // 
             this.lCrypedWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lCrypedWord.ForeColor = System.Drawing.Color.Blue;
-            this.lCrypedWord.Location = new System.Drawing.Point(389, 520);
-            this.lCrypedWord.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lCrypedWord.Location = new System.Drawing.Point(340, 390);
+            this.lCrypedWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lCrypedWord.Name = "lCrypedWord";
-            this.lCrypedWord.Size = new System.Drawing.Size(341, 60);
+            this.lCrypedWord.Size = new System.Drawing.Size(298, 45);
             this.lCrypedWord.TabIndex = 2;
             this.lCrypedWord.Text = "--";
             this.lCrypedWord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -82,10 +82,10 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(830, 106);
+            this.label2.Location = new System.Drawing.Point(726, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 46);
+            this.label2.Size = new System.Drawing.Size(32, 37);
             this.label2.TabIndex = 4;
             this.label2.Text = "0";
             // 
@@ -94,19 +94,19 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(830, 186);
+            this.label3.Location = new System.Drawing.Point(726, 140);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 46);
+            this.label3.Size = new System.Drawing.Size(32, 37);
             this.label3.TabIndex = 6;
             this.label3.Text = "0";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(961, 624);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.button1.Location = new System.Drawing.Point(841, 468);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 43);
+            this.button1.Size = new System.Drawing.Size(84, 32);
             this.button1.TabIndex = 7;
             this.button1.Text = "Quitter";
             this.button1.UseVisualStyleBackColor = true;
@@ -116,9 +116,9 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(-2, -1);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1273, 728);
+            this.pictureBox1.Size = new System.Drawing.Size(1114, 546);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -129,10 +129,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(830, 26);
+            this.label1.Location = new System.Drawing.Point(726, 20);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 46);
+            this.label1.Size = new System.Drawing.Size(32, 37);
             this.label1.TabIndex = 8;
             this.label1.Text = "0";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -142,10 +142,10 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(830, 271);
+            this.label4.Location = new System.Drawing.Point(726, 203);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 46);
+            this.label4.Size = new System.Drawing.Size(32, 37);
             this.label4.TabIndex = 9;
             this.label4.Text = "0";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -155,13 +155,12 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(830, 349);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(726, 262);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(274, 231);
+            this.dataGridView1.Size = new System.Drawing.Size(240, 173);
             this.dataGridView1.TabIndex = 10;
             // 
             // timer1
@@ -171,9 +170,9 @@
             // 
             // GameForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1267, 722);
+            this.ClientSize = new System.Drawing.Size(1109, 542);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
@@ -186,12 +185,13 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GameForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Jeux du pendu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
             this.Load += new System.EventHandler(this.GameForm_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GameForm_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

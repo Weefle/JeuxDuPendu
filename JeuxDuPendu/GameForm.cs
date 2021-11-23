@@ -472,6 +472,38 @@ namespace JeuxDuPendu
         {
 
         }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            using (var db = new BloggingContext())
+            {
+                if (server != null)
+                {
+
+                    if (db.clients.Any(x => x.Name == joueur.Name && x.Port == server.Port))
+                    {
+
+                        db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First().Stop();
+                        db.clients.Remove(db.clients.Where(x => x.Name == joueur.Name && x.Port == server.Port).First());
+
+                    }
+                    else
+                    {
+                        db.servers.AsNoTracking().Where(x => x.Name == server.Name).First().Stop();
+
+
+                        db.servers.Remove(server);
+
+
+                        db.clients.RemoveRange(db.clients.AsNoTracking().Where(x => x.Port == server.Port));
+
+                    }
+
+                    db.SaveChanges();
+
+                }
+            }
+        }
     }
 
 }
