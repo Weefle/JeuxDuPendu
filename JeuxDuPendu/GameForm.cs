@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -110,6 +111,7 @@ namespace JeuxDuPendu
             var r = new Random();
             var randomLineNumber = r.Next(0, lines.Length - 1);
             line = lines[randomLineNumber];
+            Debug.WriteLine("Mot: " + line);
             // Methode de reinitialisation classe d'affichage du pendu.
             _HangmanViewer.Reset();
             char motif = '_';
