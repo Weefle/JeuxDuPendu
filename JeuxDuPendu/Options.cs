@@ -15,6 +15,7 @@ namespace JeuxDuPendu
         public Options()
         {
             InitializeComponent();
+            //on gère ci-dessous l'affichage des éléments pour qu'ils soient transparents
             button1.BackColor = Color.Transparent;
             button1.Parent = pictureBox1;
 
@@ -27,9 +28,10 @@ namespace JeuxDuPendu
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //bouton quitter
             this.Hide();
             var form2 = new Menu();
-            //form2.Closed += (s, args) => this.Close();
+          
             form2.ShowDialog();
             this.Close();
         }
@@ -39,8 +41,8 @@ namespace JeuxDuPendu
             openFileDialog1.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + @"\..\..\..\Resources\");
             if(openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-               // Stream stream = openFileDialog1.OpenFile();
-                //TODO lire le fichier
+               
+                //récupération du nom du fichier
                 Program.fichierMots = openFileDialog1.FileName;
                             }
         }

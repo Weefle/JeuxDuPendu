@@ -54,6 +54,8 @@ namespace JeuxDuPendu
 			// et de la même taille que panel1
             _HangmanViewer.Size = panel1.Size;
 
+            //on gère ci-dessous l'affichage des éléments pour qu'ils soient transparents
+
             panel1.BackColor = Color.Transparent;
             panel1.Parent = pictureBox1;
 
@@ -154,12 +156,14 @@ namespace JeuxDuPendu
 
         private bool HasSpecialChars(string yourString)
         {
+            //fonction qui vérifie si on rentre bien une lettre et non autre chose
             return yourString.Any(ch => !Char.IsLetter(ch));
                 
         }
 
         static string RemoveDiacritics(string text)
         {
+            //fonction qui convertie les accents en lettres simples
             var normalizedString = text.Normalize(NormalizationForm.FormD);
             var stringBuilder = new StringBuilder();
 
@@ -177,7 +181,7 @@ namespace JeuxDuPendu
 
         private void KeyPressed(char letter)
         {
-            //if (line.Contains(letter))
+            //on va effectuer ci-dessous le check sur chaque lettre
        
             if (!HasSpecialChars(letter.ToString()))
             {
@@ -193,6 +197,7 @@ namespace JeuxDuPendu
                         }
                     }
                     lCrypedWord.Text = sb.ToString();
+                    //si le mot ne contient plus "_", alors le joueur a gagné
                     if (!lCrypedWord.Text.Contains("_"))
                     {
                         using (Form form = new Form())
@@ -215,6 +220,7 @@ namespace JeuxDuPendu
                         sp = null;
                         joueur.Wins++;
 
+                        //on appelle la base de données pour supprimer le serveur ou le/les client(s)
                         if (server != null)
                         {
                             using (var db = new BloggingContext())
@@ -263,7 +269,7 @@ namespace JeuxDuPendu
                                 StartNewGame();
                         }
                     }
-                    //TODO corriger decrementation nombre de lettres
+                    //on décrémente ici le nombre de lettres en fonction des lettres trouvées (accepte plusieurs lettres en même temps)
                     if (!before.Contains(letter))
                     {
                         int count = sb.ToString().Count(s => s == letter);
@@ -274,14 +280,14 @@ namespace JeuxDuPendu
                 }
                 else
                 {
-                    //if (!richTextBox1.Text.Contains(letter))
+                    //si les lettres fausses contiennent la lettre courante
                     if (!_wrongLetters.Contains(letter))
                     {
                         _wrongLetters.Add(letter);
                         essaisRestants--;
                         _HangmanViewer.MoveNextStep();
                         PictureBox pb = new PictureBox();
-                        //TODO corriger problème avec les accents !
+                        //on converti ici les lettres avec accents en lettres basiques pour utiliser les images
                         pb.Image = Image.FromFile("../../../Resources/letters/letter_" + RemoveDiacritics(letter.ToString()).ToUpperInvariant() + ".png");
                         pb.Location = new Point(100, pos);
                         pos+= 50;
@@ -290,12 +296,12 @@ namespace JeuxDuPendu
                         _wrongPictures.Add(pb);
                         this.Controls.Add(pb);
                         pb.BringToFront();
-                        //richTextBox1.Text += letter + "\n";
+                     
                         label3.Text = "Il vous reste " + essaisRestants.ToString() + " essai(s) !";
                     }
 
 
-                    //listView1.Items.Add(letter.ToString());
+               
                     // On avance le pendu d'une etape
 
 
@@ -383,6 +389,7 @@ namespace JeuxDuPendu
             label1.Text = joueur.Name;
             label4.Visible = false;
             dataGridView1.Visible = false;
+            //si le serveur existe (jeu en multi), alors on affiche la liste de joueurs
             if (server != null)
             {
                 label4.Visible = true;
@@ -396,7 +403,7 @@ namespace JeuxDuPendu
 
         private void button1_Click(object sender, EventArgs e)
         {
-         
+         //bouton pour quitter et supprimer le serveur ou le/les client(s)
             using (var db = new BloggingContext())
             {
                 if (server != null)
@@ -449,11 +456,12 @@ namespace JeuxDuPendu
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //le timer permet de rafraichir la liste de joueurs
             using (var db = new BloggingContext())
             {
               
                     
-                
+                //si le serveur n'existe plus dans la base de données, on arrête le programme et les clients
                 if(!db.servers.Contains(server))
                 {
                     timer1.Enabled = false;

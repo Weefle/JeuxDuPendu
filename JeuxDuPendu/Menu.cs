@@ -21,6 +21,7 @@ namespace JeuxDuPendu
         {
             InitializeComponent();
 
+            //initialisation des éléments avec transparence
             label1.BackColor = Color.Transparent;
             label1.Parent = pictureBox1;
 
@@ -43,10 +44,7 @@ namespace JeuxDuPendu
         private void button1_Click(object sender, EventArgs e)
         {
 
-            /*this.Hide();
-            var form2 = new GameForm();
-            form2.Closed += (s, args) => this.Close();
-            form2.Show();*/
+            //solo
             Joueur joueur;
 
             const string mess =
@@ -72,7 +70,7 @@ namespace JeuxDuPendu
 
                     this.Hide();
                     var form2 = new GameForm(joueur, null);
-                    //form2.Closed += (s, args) => this.Close();
+         
                     form2.ShowDialog();
                     this.Close();
                 }
@@ -82,16 +80,17 @@ namespace JeuxDuPendu
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //options
             this.Hide();
             var form2 = new Options();
-            //form2.Closed += (s, args) => this.Close();
+           
             form2.ShowDialog();
             this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            //multi
             Joueur joueur;
 
             const string mess =
@@ -127,7 +126,7 @@ namespace JeuxDuPendu
                     var result = DialogBox(caption, msg, null, "Créer", "Rejoindre", null);
 
 
-                if (result == DialogResult.OK)
+                if (result == DialogResult.Yes)
                 {
                     const string message =
      "Donnez un nom à votre serveur";
@@ -161,14 +160,11 @@ namespace JeuxDuPendu
                             this.Close();
                         }
                 }
-                else if (result == DialogResult.Cancel)
+                else if (result == DialogResult.No)
                 {
                     this.Hide();
                     var form2 = new ServerListForm(joueur);
-                    /*var form3 = new GameForm();
-                    form2.Closed += (s, args) => this.Close();
-                    form3.Closed += (s, args) => this.Close();
-                    form2.Show();*/
+       
                     form2.ShowDialog();
                     this.Close();
                 }
@@ -178,8 +174,9 @@ namespace JeuxDuPendu
            
     }
 
-        public static DialogResult DialogBox(string title, string promptText, string value, string button1 = "OK", string button2 = "Cancel", string button3 = null)
+        public static DialogResult DialogBox(string title, string promptText, string value, string button1 = "Yes", string button2 = "No", string button3 = "Cancel")
         {
+            //cette fonction permet l'affichage d'une MessageBox personnalisée
             Form form = new Form();
             Label label = new Label();
             TextBox textBox = new TextBox();
@@ -220,9 +217,9 @@ namespace JeuxDuPendu
             button_1.Text = button1;
             button_2.Text = button2;
             button_3.Text = button3 ?? string.Empty;
-            button_1.DialogResult = DialogResult.OK;
-            button_2.DialogResult = DialogResult.Cancel;
-            button_3.DialogResult = DialogResult.Yes;
+            button_1.DialogResult = DialogResult.Yes;
+            button_2.DialogResult = DialogResult.No;
+            button_3.DialogResult = DialogResult.Cancel;
 
 
             button_1.SetBounds(buttonStartPos, 75, 80, 40);
@@ -266,16 +263,17 @@ namespace JeuxDuPendu
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //scores
             this.Hide();
             var form2 = new Scores();
-            //form2.Closed += (s, args) => this.Close();
+          
             form2.ShowDialog();
             this.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //Program.RefreshData();
+           //quitte le programme
             this.Close();
         }
     }

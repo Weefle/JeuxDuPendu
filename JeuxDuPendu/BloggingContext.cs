@@ -5,7 +5,7 @@ namespace JeuxDuPendu
 {
     public class BloggingContext : DbContext
     {
-
+        //déclaration des objets à sauvegarder dans la base de données
         public DbSet<AsyncServer> servers { get; set; }
 
         public DbSet<AsyncClient> clients { get; set; }
@@ -21,7 +21,7 @@ namespace JeuxDuPendu
         }
 
         // The following configures EF to create a Sqlite database file in the
-        // special "local" folder for your platform.
+        // special "Documents" folder for your platform.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite($"Data Source={DbPath}");
     }

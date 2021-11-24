@@ -15,6 +15,7 @@ namespace JeuxDuPendu
         public Scores()
         {
             InitializeComponent();
+            //on gère ci-dessous l'affichage des éléments pour qu'ils soient transparents
             button1.BackColor = Color.Transparent;
             button1.Parent = pictureBox1;
 
@@ -23,24 +24,18 @@ namespace JeuxDuPendu
 
         private void Scores_Load(object sender, EventArgs e)
         {
-           
-                CreateListViewItem(dataGridView1);
             
+
         }
 
-        public static void CreateListViewItem(DataGridView dataGridView)
-        {
-            using (var db = new BloggingContext())
-            {
-                dataGridView.DataSource = db.joueurs.ToList<Joueur>();
-            }
-        }
+      
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //retour au menu
             this.Hide();
             var form2 = new Menu();
-            //form2.Closed += (s, args) => this.Close();
+           
             form2.ShowDialog();
             this.Close();
         }
@@ -48,6 +43,15 @@ namespace JeuxDuPendu
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //rafraichissement de la liste des joueurs
+            using (var db = new BloggingContext())
+            {
+                dataGridView1.DataSource = db.joueurs.ToList<Joueur>();
+            }
         }
     }
 }

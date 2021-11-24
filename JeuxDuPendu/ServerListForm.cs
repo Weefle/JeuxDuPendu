@@ -18,6 +18,7 @@ namespace JeuxDuPendu
         {
             this.joueur = joueur;
             InitializeComponent();
+            //on gère ci-dessous l'affichage des éléments pour qu'ils soient transparents
             button1.BackColor = Color.Transparent;
             button1.Parent = pictureBox1;
 
@@ -26,9 +27,10 @@ namespace JeuxDuPendu
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //retour au menu
             this.Hide();
             var form2 = new Menu();
-            //form2.Closed += (s, args) => this.Close();
+          
             form2.ShowDialog();
             this.Close();
         }
@@ -42,6 +44,7 @@ namespace JeuxDuPendu
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //évènement lors du clic sur un serveur
             AsyncServer server;
             AsyncClient client;
             using (var db = new BloggingContext())
@@ -73,6 +76,7 @@ namespace JeuxDuPendu
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //rafraichissement de la liste des serveurs
             using (var db = new BloggingContext())
             {
 
